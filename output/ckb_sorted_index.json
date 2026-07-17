@@ -1,0 +1,166 @@
+{
+  "generated": "2026-07-17T09:07:44.228807",
+  "total_documents": 5,
+  "documents": [
+    {
+      "filename": "2303-12345_Statement_of_Claim.txt",
+      "filepath": "input_docs\\2303-12345_Statement_of_Claim.txt",
+      "header": {
+        "court_file_number": "2303-12345",
+        "judicial_centre": "Calgary",
+        "plaintiff": "John Smith",
+        "defendant": "Jane Doe",
+        "prosecution": "",
+        "accused": "",
+        "document_type": "Statement of Claim",
+        "address_for_service": "123 Main Street, Calgary, AB T2P 1A1 FILED ON: January 15, 2023 CLERK'S STAMP: FILED 2023-01-15",
+        "date_filed": "FILED 2023-01-15",
+        "clerk_stamp": "FILED 2023-01-15",
+        "jurisdiction": "civil",
+        "party_type": "plaintiff",
+        "document_type_enum": "statement_of_claim",
+        "date_id": "2023-12345",
+        "case_id": "12345",
+        "year": 2023,
+        "sequence": 12345
+      },
+      "sort_key": [
+        0,
+        "2023-12345",
+        "12345",
+        2,
+        2,
+        2,
+        "2303-12345_Statement_of_Claim.txt"
+      ]
+    },
+    {
+      "filename": "2301-00567_Affidavit.txt",
+      "filepath": "input_docs\\2301-00567_Affidavit.txt",
+      "header": {
+        "court_file_number": "2301-00567",
+        "judicial_centre": "Edmonton",
+        "plaintiff": "ABC Corporation",
+        "defendant": "XYZ Ltd.",
+        "prosecution": "",
+        "accused": "",
+        "document_type": "Affidavit of John Smith",
+        "address_for_service": "456 Jasper Avenue, Edmonton, AB T5J 0K1 FILED ON: February 20, 2023 CLERK'S STAMP: FILED 2023-02-20",
+        "date_filed": "FILED 2023-02-20",
+        "clerk_stamp": "FILED 2023-02-20",
+        "jurisdiction": "civil",
+        "party_type": "plaintiff",
+        "document_type_enum": "affidavit",
+        "date_id": "2023-00567",
+        "case_id": "00567",
+        "year": 2023,
+        "sequence": 567
+      },
+      "sort_key": [
+        1,
+        "2023-00567",
+        "00567",
+        2,
+        6,
+        2,
+        "2301-00567_Affidavit.txt"
+      ]
+    },
+    {
+      "filename": "2212-09876_Information.txt",
+      "filepath": "input_docs\\2212-09876_Information.txt",
+      "header": {
+        "court_file_number": "2212-09876",
+        "judicial_centre": "Lethbridge",
+        "plaintiff": "",
+        "defendant": "",
+        "prosecution": "His Majesty the King",
+        "accused": "Robert Johnson",
+        "document_type": "Information",
+        "address_for_service": "Crown Prosecutor's Office, Lethbridge, AB FILED ON: March 10, 2022 CLERK'S STAMP: FILED 2022-03-10",
+        "date_filed": "FILED 2022-03-10",
+        "clerk_stamp": "FILED 2022-03-10",
+        "jurisdiction": "criminal",
+        "party_type": "prosecution",
+        "document_type_enum": "information",
+        "date_id": "2022-09876",
+        "case_id": "09876",
+        "year": 2022,
+        "sequence": 9876
+      },
+      "sort_key": [
+        2,
+        "2022-09876",
+        "09876",
+        1,
+        11,
+        1,
+        "2212-09876_Information.txt"
+      ]
+    },
+    {
+      "filename": "2309-04567_Probate.txt",
+      "filepath": "input_docs\\2309-04567_Probate.txt",
+      "header": {
+        "court_file_number": "2309-04567",
+        "judicial_centre": "Medicine Hat",
+        "plaintiff": "Estate of Mary Thompson",
+        "defendant": "",
+        "prosecution": "",
+        "accused": "",
+        "document_type": "Application for Grant of Probate",
+        "address_for_service": "321 South Railway Street, Medicine Hat, AB T1A 2B3 FILED ON: October 5, 2023 CLERK'S STAMP: FILED 2023-10-05",
+        "date_filed": "FILED 2023-10-05",
+        "clerk_stamp": "FILED 2023-10-05",
+        "jurisdiction": "surrogate",
+        "party_type": "plaintiff",
+        "document_type_enum": "application",
+        "date_id": "2023-04567",
+        "case_id": "04567",
+        "year": 2023,
+        "sequence": 4567
+      },
+      "sort_key": [
+        3,
+        "2023-04567",
+        "04567",
+        2,
+        7,
+        4,
+        "2309-04567_Probate.txt"
+      ]
+    },
+    {
+      "filename": "2405-00123_Parenting_Order.txt",
+      "filepath": "input_docs\\2405-00123_Parenting_Order.txt",
+      "header": {
+        "court_file_number": "2405-00123",
+        "judicial_centre": "Red Deer",
+        "plaintiff": "Sarah Wilson",
+        "defendant": "Michael Wilson",
+        "prosecution": "",
+        "accused": "",
+        "document_type": "Parenting Order",
+        "address_for_service": "789 Gaetz Avenue, Red Deer, AB T4P 2J7 FILED ON: June 1, 2024 CLERK'S STAMP: FILED 2024-06-01",
+        "date_filed": "FILED 2024-06-01",
+        "clerk_stamp": "FILED 2024-06-01",
+        "jurisdiction": "family",
+        "party_type": "plaintiff",
+        "document_type_enum": "parenting_order",
+        "date_id": "2024-00123",
+        "case_id": "00123",
+        "year": 2024,
+        "sequence": 123
+      },
+      "sort_key": [
+        4,
+        "2024-00123",
+        "00123",
+        2,
+        17,
+        3,
+        "2405-00123_Parenting_Order.txt"
+      ]
+    }
+  ]
+}

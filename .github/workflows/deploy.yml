@@ -1,0 +1,186 @@
+name: Deploy CKB Document Sorter to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 2 AM UTC
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          pip install pdfplumber python-docx striprtf
+      
+      - name: Create input directory with sample documents
+        run: |
+          mkdir -p input_docs
+          # Create sample CKB documents for testing
+          cat > input_docs/2303-12345_Statement_of_Claim.txt << 'EOF'
+COURT FILE NUMBER: 2303-12345
+JUDICIAL CENTRE: Calgary
+PLAINTIFF: John Smith
+DEFENDANT: Jane Doe
+DOCUMENT: Statement of Claim
+ADDRESS FOR SERVICE: 123 Main Street, Calgary, AB T2P 1A1
+FILED ON: January 15, 2023
+CLERK'S STAMP: FILED 2023-01-15
+
+IN THE COURT OF KING'S BENCH OF ALBERTA
+JUDICIAL CENTRE OF CALGARY
+
+BETWEEN:
+JOHN SMITH
+PLAINTIFF
+
+AND:
+JANE DOE
+DEFENDANT
+
+STATEMENT OF CLAIM
+EOF
+          
+          cat > input_docs/2301-00567_Affidavit.txt << 'EOF'
+COURT FILE NUMBER: 2301-00567
+JUDICIAL CENTRE: Edmonton
+PLAINTIFF: ABC Corporation
+DEFENDANT: XYZ Ltd.
+DOCUMENT: Affidavit of John Smith
+ADDRESS FOR SERVICE: 456 Jasper Avenue, Edmonton, AB T5J 0K1
+FILED ON: February 20, 2023
+CLERK'S STAMP: FILED 2023-02-20
+
+IN THE COURT OF KING'S BENCH OF ALBERTA
+JUDICIAL CENTRE OF EDMONTON
+
+BETWEEN:
+ABC CORPORATION
+PLAINTIFF
+
+AND:
+XYZ LTD.
+DEFENDANT
+
+AFFIDAVIT
+EOF
+          
+          cat > input_docs/2212-09876_Information.txt << 'EOF'
+COURT FILE NUMBER: 2212-09876
+JUDICIAL CENTRE: Lethbridge
+PROSECUTION: His Majesty the King
+ACCUSED: Robert Johnson
+DOCUMENT: Information
+ADDRESS FOR SERVICE: Crown Prosecutor's Office, Lethbridge, AB
+FILED ON: March 10, 2022
+CLERK'S STAMP: FILED 2022-03-10
+
+IN THE COURT OF KING'S BENCH OF ALBERTA
+JUDICIAL CENTRE OF LETHBRIDGE
+
+BETWEEN:
+HIS MAJESTY THE KING
+PROSECUTION
+
+AND:
+ROBERT JOHNSON
+ACCUSED
+
+INFORMATION
+EOF
+          
+          cat > input_docs/2405-00123_Parenting_Order.txt << 'EOF'
+COURT FILE NUMBER: 2405-00123
+JUDICIAL CENTRE: Red Deer
+PLAINTIFF: Sarah Wilson
+DEFENDANT: Michael Wilson
+DOCUMENT: Parenting Order
+ADDRESS FOR SERVICE: 789 Gaetz Avenue, Red Deer, AB T4P 2J7
+FILED ON: June 1, 2024
+CLERK'S STAMP: FILED 2024-06-01
+
+IN THE COURT OF KING'S BENCH OF ALBERTA
+JUDICIAL CENTRE OF RED DEER
+FAMILY LAW
+
+BETWEEN:
+SARAH WILSON
+APPLICANT
+
+AND:
+MICHAEL WILSON
+RESPONDENT
+
+PARENTING ORDER
+EOF
+          
+          cat > input_docs/2309-04567_Probate.txt << 'EOF'
+COURT FILE NUMBER: 2309-04567
+JUDICIAL CENTRE: Medicine Hat
+PLAINTIFF: Estate of Mary Thompson
+DEFENDANT: 
+DOCUMENT: Application for Grant of Probate
+ADDRESS FOR SERVICE: 321 South Railway Street, Medicine Hat, AB T1A 2B3
+FILED ON: October 5, 2023
+CLERK'S STAMP: FILED 2023-10-05
+
+IN THE COURT OF KING'S BENCH OF ALBERTA
+JUDICIAL CENTRE OF MEDICINE HAT
+SURROGATE MATTERS
+
+IN THE ESTATE OF:
+MARY THOMPSON
+DECEASED
+
+APPLICATION FOR GRANT OF PROBATE
+EOF
+
+      - name: Run CKB Document Sorter
+        run: |
+          python ckb_document_sorter.py input_docs output --format all --copy
+      
+      - name: Copy outputs to site directory
+        run: |
+          mkdir -p _site
+          cp output/ckb_sorted_index.md _site/index.md
+          cp output/ckb_sorted_index.json _site/index.json
+          cp output/ckb_sorted_index.html _site/index.html
+          cp -r output/sorted _site/sorted 2>/dev/null || true
+          cp README.md _site/README.md
+          cp ckb_document_sorter.py _site/ckb_document_sorter.py
+      
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,21 @@
+# CKB Document Sorter - only include these files
+# Exclude all hermes-agent project files
+*
+!.gitignore
+!.github/
+!.github/workflows/
+!.github/workflows/deploy.yml
+!ckb_document_sorter.py
+!test_ckb_sorter.py
+!requirements.txt
+!README.md
+!input_docs/
+!input_docs/**
+!output/
+!output/**
+
+# But still ignore node_modules, venv, etc from our own dirs
+node_modules/
+venv/
+__pycache__/
+*.pyc
